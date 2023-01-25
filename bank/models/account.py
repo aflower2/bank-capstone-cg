@@ -1,6 +1,4 @@
 from pydantic import BaseModel
-from orders.models.product import Product
-
 
 class Account(BaseModel):
     address: str

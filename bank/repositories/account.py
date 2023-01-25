@@ -27,15 +27,22 @@ class AccountRepository():
 
     def get_all(self):
         with connection.cursor() as cursor:
-            cursor.execute('SELECT * FROM Account INNER JOIN Customer ON Account.customer_id = Customer.id INNER JOIN Address ON Customer.address_id = Address.id;')
+            cursor.execute('SELECT address, city, state, zipcode, firstname, lastname, customer.email_address, account.account_number, account.curr_balance FROM Account INNER JOIN Customer ON Account.customer_id = Customer.id INNER JOIN Address ON Customer.address_id = Address.id;')
             result = cursor.fetchall()
-        return result
+            response_dict = {}
+            for i in range(len(result)):
+                print(i)
+                response = {"Address": result[i][0], "City": result[i][1], "State": result[i][2], "Zip Code": result[i][3], "First Name": result[i][4], "Last Name": result[i][5], "Email Address": result[i][6], "Account Number": result[i][7], "Current Balance": result[i][8]}
+                response_dict[i] = response
+        return response_dict
     
     def get(self, account_number):
         with connection.cursor() as cursor:
-            cursor.execute(f"SELECT * FROM Account INNER JOIN Customer ON Account.customer_id = Customer.id INNER JOIN Address ON Customer.address_id = Address.id WHERE account_number = '{account_number}';")
+            cursor.execute(f"SELECT address, city, state, zipcode, firstname, lastname, customer.email_address, account.account_number, account.curr_balance FROM Account INNER JOIN Customer ON Account.customer_id = Customer.id INNER JOIN Address ON Customer.address_id = Address.id WHERE account_number = '{account_number}';")
             result = cursor.fetchall()
-        return result
+            results = result[0]
+            response = {"Address": results[0], "City": results[1], "State": results[2], "Zip Code": results[3], "First Name": results[4], "Last Name": results[5], "Email Address": results[6], "Account Number": results[7], "Current Balance": results[8]}
+        return response
 
     def update(self, account_number, balance: Balance):
         with connection.cursor() as cursor:
