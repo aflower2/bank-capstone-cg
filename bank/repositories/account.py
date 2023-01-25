@@ -31,7 +31,6 @@ class AccountRepository():
             result = cursor.fetchall()
             response_dict = {}
             for i in range(len(result)):
-                print(i)
                 response = {"Address": result[i][0], "City": result[i][1], "State": result[i][2], "Zip Code": result[i][3], "First Name": result[i][4], "Last Name": result[i][5], "Email Address": result[i][6], "Account Number": result[i][7], "Current Balance": result[i][8]}
                 response_dict[i] = response
         return response_dict
