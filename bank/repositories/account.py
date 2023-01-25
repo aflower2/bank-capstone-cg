@@ -3,10 +3,11 @@ from bank.models.balance import Balance
 import psycopg2
 
 connection = psycopg2.connect(
-        host="localhost",
-        database="bank",
-        user="postgres",
-        password="password123",
+        host='localhost',
+        database='bank',
+        user='postgres',
+        port='2023',
+        password='password'
     )
 connection.set_session(autocommit=True)
 

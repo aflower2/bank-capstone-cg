@@ -7,10 +7,11 @@ from bank.services.account import AccountService
 import psycopg2
 
 connection = psycopg2.connect(
-    host="localhost",
-    database="bank",
-    user="postgres",
-    password="password123",
+    host='localhost',
+    database='bank',
+    user='postgres',
+    port='2023',
+    password='password'
 )
 connection.set_session(autocommit=True)
 
@@ -61,5 +62,4 @@ async def delete_account(account_number):
 
 
 if __name__ == "__main__":
-    uvicorn.run("app:app", host="0.0.0.0", port=8080, reload=True,
-                timeout_keep_alive=3600, debug=True, workers=10)
+    uvicorn.run("app:app")
