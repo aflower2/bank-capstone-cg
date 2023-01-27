@@ -33,7 +33,6 @@ app = FastAPI()
 account_repository = AccountRepository()
 account_service = AccountService(account_repository)
 
-
 @app.get('/api/accounts')
 async def retrieve_products():
     responses = account_service.get_all_accounts()
@@ -58,7 +57,6 @@ async def update_balance(account_number, balance: Balance):
 async def delete_account(account_number):
     account_service.close_account(account_number)
     return f"Account {account_number} has been deleted."
-
 
 if __name__ == "__main__":
     uvicorn.run("app:app", host="0.0.0.0", port=8080, reload=True,
